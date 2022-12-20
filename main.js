@@ -39,12 +39,15 @@ const fillPalette = () => {
 // Gera cores aleatórias para a paleta
 const randomColors = () => {
     for (let index = 1; index <= 3; index += 1) {
-        // from https://css-tricks.com/snippets/javascript/random-hex-color/
-        const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+        // from https://stackoverflow.com/questions/1152024/best-way-to-generate-a-random-color-in-javascript
+        const r = Math.floor(Math.random()*256);
+        const g = Math.floor(Math.random()*256);
+        const b = Math.floor(Math.random()*256);
+        const randomColor = "rgb(" + r + "," + g + "," + b + ")";
         // -------------------------------------
         const colors = document.getElementsByClassName('color');
-        paletteColors[`${index + 1}`] = "#" + randomColor;
-        colors[index].style.backgroundColor = "#" + randomColor;
+        paletteColors[`${index + 1}`] = randomColor;
+        colors[index].style.backgroundColor = randomColor;
     }
     localStorage.setItem('colorPalette', JSON.stringify(paletteColors));
 }
