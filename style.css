@@ -1,5 +1,5 @@
 body {
-    background-color: white;
+    background-color: blueviolet;
 }
 
 .color {
@@ -8,4 +8,16 @@ body {
     display: inline-block;
     margin-right: 10px;
     border: 1px solid black;
+}
+
+#pixel-board {
+    margin-top: 10px;
+}
+
+#pixel-board .pixel {
+    background-color: white;
+    width: 40px;
+    height: 40px;
+    margin-right: 4px;
+    display: inline-block;
 }
