@@ -16,6 +16,7 @@ if (localStorage.getItem('colorPalette')) {
 const palette = document.getElementById('color-palette');
 const randomColorsBtn = document.getElementById('button-random-color');
 const board = document.getElementById('pixel-board');
+const clearBtn = document.getElementById('clear-board');
 
 // Coloca as cores na paleta
 const fillPalette = () => {
@@ -67,6 +68,14 @@ const selectColor = (event) => {
 // Colore um pixel
 const paint = (event) => event.target.style.backgroundColor = selectedColor;
 
+// Limpa o quadro
+const clearBoard = () => {
+    const pixels = document.getElementsByClassName('pixel');
+    for (let index = 0; index < pixels.length; index += 1) {
+        pixels[index].style.backgroundColor = 'white';
+    }
+}
+
 // Chama funções
 
 fillPalette();
@@ -75,3 +84,4 @@ createBoard();
 // Listeners
 
 randomColorsBtn.addEventListener('click', randomColors);
+clearBtn.addEventListener('click', clearBoard);
