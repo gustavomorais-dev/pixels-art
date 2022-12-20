@@ -55,7 +55,6 @@ const createBoard = () => {
     }
 }
 
-
 // Chama funções
 
 fillPalette();
