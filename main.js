@@ -5,6 +5,7 @@ let paletteColors = {
     3: '#978f84',
     4: '#b7ae8f',
 }
+let selectedColor = 'black';
 
 // localStorage?
 if (localStorage.getItem('colorPalette')) {
@@ -49,6 +50,7 @@ const createBoard = () => {
         const pixel = document.createElement('div');
         pixel.classList.add('pixel');
         board.appendChild(pixel);
+        pixel.addEventListener('click', paint)
     }
 }
 
@@ -59,7 +61,11 @@ const selectColor = (event) => {
         colors[index].classList.remove('selected');
     }
     event.target.classList.add('selected');
+    selectedColor = event.target.style.backgroundColor;
 }
+
+// Colore um pixel
+const paint = (event) => event.target.style.backgroundColor = selectedColor;
 
 // Chama funções
 
