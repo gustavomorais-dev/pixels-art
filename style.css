@@ -12,6 +12,8 @@ body {
 
 #pixel-board {
     margin-top: 10px;
+    width: 210px;
+    line-height: 0px;
 }
 
 #pixel-board .pixel {
@@ -19,6 +21,8 @@ body {
     width: 40px;
     height: 40px;
     border: 1px solid black;
-    margin-right: 4px;
     display: inline-block;
+}
+
+.selected {
 }

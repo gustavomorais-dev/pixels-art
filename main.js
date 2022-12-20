@@ -23,7 +23,11 @@ const fillPalette = () => {
         color.style.backgroundColor = paletteColors[`${index}`];
         color.classList.add('color');
         palette.appendChild(color);
+        color.addEventListener('click', selectColor);
+
     }
+    const colors = document.getElementsByClassName('color');
+    colors[0].classList.add('selected');
 }
 
 // Gera cores aleatórias para a paleta
@@ -41,18 +45,20 @@ const randomColors = () => {
 
 // Cria o board
 const createBoard = () => {
-    let counter = 0;
     for (let index = 0; index < 25; index += 1) {
         const pixel = document.createElement('div');
-        const br = document.createElement('br');
         pixel.classList.add('pixel');
         board.appendChild(pixel);
-        counter += 1
-        if (counter == 5) {
-            board.appendChild(br);
-            counter = 0;
-        }
     }
+}
+
+// Seleciona cor da paleta
+const selectColor = (event) => {
+    const colors = document.getElementsByClassName('color');
+    for (let index = 0; index < colors.length; index += 1) {
+        colors[index].classList.remove('selected');
+    }
+    event.target.classList.add('selected');
 }
 
 // Chama funções
