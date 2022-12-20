@@ -4,12 +4,16 @@ let paletteColors = {
     2: '#4a362f',
     3: '#978f84',
     4: '#b7ae8f',
-}
+};
 let selectedColor = 'black';
+let boardColors = [];
 
 // localStorage?
 if (localStorage.getItem('colorPalette')) {
     paletteColors = JSON.parse(localStorage.getItem('colorPalette'));
+}
+if (localStorage.getItem('pixelBoard')) {
+    boardColors = JSON.parse(localStorage.getItem('pixelBoard'));
 }
 
 // Captura elementos
@@ -50,6 +54,7 @@ const createBoard = () => {
     for (let index = 0; index < 25; index += 1) {
         const pixel = document.createElement('div');
         pixel.classList.add('pixel');
+        boardColors.length > 0 ? pixel.style.backgroundColor = boardColors[index] : pixel.style.backgroundColor = 'white';
         board.appendChild(pixel);
         pixel.addEventListener('click', paint)
     }
@@ -66,13 +71,34 @@ const selectColor = (event) => {
 }
 
 // Colore um pixel
-const paint = (event) => event.target.style.backgroundColor = selectedColor;
+const paint = (event) => {
+    event.target.style.backgroundColor = selectedColor;
+    saveBoard();
+}
 
 // Limpa o quadro
 const clearBoard = () => {
     const pixels = document.getElementsByClassName('pixel');
     for (let index = 0; index < pixels.length; index += 1) {
         pixels[index].style.backgroundColor = 'white';
+    }
+    saveBoard();
+}
+
+// Salva o quadro
+const saveBoard = () => {
+    const pixels = document.getElementsByClassName('pixel');
+    for (let index = 0; index < pixels.length; index += 1) { 
+        boardColors[index] = pixels[index].style.backgroundColor;
+    }
+    localStorage.setItem('pixelBoard', (JSON.stringify(boardColors)))
+}
+
+// Pinta o board com os dados salvos carregados
+const paintBoard = () => {
+    const pixels = document.getElementsByClassName('pixel');
+    for (let index = 0; index < pixels.length; index += 1) { 
+        pixels[index].style.backgroundColor = boardColors[index];
     }
 }
 
