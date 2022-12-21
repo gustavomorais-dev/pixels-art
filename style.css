@@ -1,6 +1,6 @@
 body {
   background-color: blueviolet;
-  background-image: url("./images/bg.webp");
+  background-image: url('./images/bg.webp');
 }
 
 .color {
@@ -27,32 +27,28 @@ body {
 }
 
 main {
-    text-align: center;
+  text-align: center;
 }
 
 #title {
-    text-align: center;
-    color: white;
-    width: 300px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border: 3px solid white;
+  text-align: center;
+  color: white;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 3px solid white;
 }
 
 #config {
-    margin-top: 35px;
+  margin-top: 35px;
 }
 
 #board-size {
-    width: 35px;
+  width: 35px;
 }
 
 #color-palette {
-    margin-top: 35px;
-}
-
-.selected {
-    color: white;
+  margin-top: 35px;
 }
