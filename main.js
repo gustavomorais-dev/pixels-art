@@ -119,7 +119,7 @@ const setBoardSize = () => {
     pixel[0].remove(0);
   }
   localStorage.removeItem('pixelBoard');
-  boardSize = parseInt(input.value);
+  boardSize = Number(input.value);
   createBoard();
 };
 
