@@ -67,6 +67,16 @@ const randomColors = () => {
   localStorage.setItem('colorPalette', JSON.stringify(paletteColors));
 };
 
+// Salva o quadro
+const saveBoard = () => {
+  const pixels = document.getElementsByClassName('pixel');
+  for (let index = 0; index < pixels.length; index += 1) {
+    boardColors[index] = pixels[index].style.backgroundColor;
+  }
+  localStorage.setItem('pixelBoard', (JSON.stringify(boardColors)));
+  localStorage.setItem('boardSize', (JSON.stringify(boardSize)));
+};
+
 // Colore um pixel
 const paint = (event) => {
   const pixelToPaint = event.target;
@@ -84,28 +94,25 @@ const createBoard = () => {
       pixel.style.backgroundColor = boardColors[index];
     } else {
       pixel.style.backgroundColor = 'white';
-    };
+    }
     board.appendChild(pixel);
-    pixel.addEventListener('click', paint)
+    pixel.addEventListener('click', paint);
   }
   saveBoard();
 };
 
 // Modifica o tamanho do board
-const setBoardSize = (event) => {
-  // Valida o valor
+const setBoardSize = () => {
   if (document.getElementById('board-size').value == '') {
     window.alert('Board inválido!');
     return;
   }
-  // Corrige o valor
   if (document.getElementById('board-size').value < 5) {
     document.getElementById('board-size').value = 5;
   }
   if (document.getElementById('board-size').value > 50) {
     document.getElementById('board-size').value = 50;
   }
-  // Deleta o board antigo
   for (let index = 0; index < (boardSize ** 2); index += 1) {
     const pixel = document.getElementsByClassName('pixel');
     pixel[0].remove(0);
@@ -123,16 +130,6 @@ const clearBoard = () => {
     pixels[index].style.backgroundColor = 'white';
   }
   saveBoard();
-};
-
-// Salva o quadro
-const saveBoard = () => {
-  const pixels = document.getElementsByClassName('pixel');
-  for (let index = 0; index < pixels.length; index += 1) {
-    boardColors[index] = pixels[index].style.backgroundColor;
-  }
-  localStorage.setItem('pixelBoard', (JSON.stringify(boardColors)));
-  localStorage.setItem('boardSize', (JSON.stringify(boardSize)));
 };
 
 // Chama funções
