@@ -90,7 +90,7 @@ const createBoard = () => {
   for (let index = 0; index < (boardSize ** 2); index += 1) {
     const pixel = document.createElement('div');
     pixel.classList.add('pixel');
-    if (boardColors.length > 0) { 
+    if (boardColors.length > 0) {
       pixel.style.backgroundColor = boardColors[index];
     } else {
       pixel.style.backgroundColor = 'white';
@@ -103,23 +103,23 @@ const createBoard = () => {
 
 // Modifica o tamanho do board
 const setBoardSize = () => {
-  if (document.getElementById('board-size').value == '') {
+  const input = document.getElementById('board-size');
+  if (input.value === '') {
     window.alert('Board inválido!');
     return;
   }
-  if (document.getElementById('board-size').value < 5) {
-    document.getElementById('board-size').value = 5;
+  if (input.value < 5) {
+    input.value = 5;
   }
-  if (document.getElementById('board-size').value > 50) {
-    document.getElementById('board-size').value = 50;
+  if (input.value > 50) {
+    input.value = 50;
   }
   for (let index = 0; index < (boardSize ** 2); index += 1) {
     const pixel = document.getElementsByClassName('pixel');
     pixel[0].remove(0);
   }
   localStorage.removeItem('pixelBoard');
-  // Cria o novo board
-  boardSize = parseInt(document.getElementById('board-size').value);
+  boardSize = parseInt(input.value);
   createBoard();
 };
 
