@@ -69,9 +69,10 @@ const randomColors = () => {
 
 // Colore um pixel
 const paint = (event) => {
-  event.target.style.backgroundColor = selectedColor;
+  const pixelToPaint = event.target;
+  pixelToPaint.style.backgroundColor = selectedColor;
   saveBoard();
-}
+};
 
 // Cria o board
 const createBoard = () => {
@@ -83,7 +84,7 @@ const createBoard = () => {
       pixel.style.backgroundColor = boardColors[index];
     } else {
       pixel.style.backgroundColor = 'white';
-    }
+    };
     board.appendChild(pixel);
     pixel.addEventListener('click', paint)
   }
@@ -113,7 +114,7 @@ const setBoardSize = (event) => {
   // Cria o novo board
   boardSize = parseInt(document.getElementById('board-size').value);
   createBoard();
-}
+};
 
 // Limpa o quadro
 const clearBoard = () => {
@@ -122,7 +123,7 @@ const clearBoard = () => {
     pixels[index].style.backgroundColor = 'white';
   }
   saveBoard();
-}
+};
 
 // Salva o quadro
 const saveBoard = () => {
@@ -132,15 +133,7 @@ const saveBoard = () => {
   }
   localStorage.setItem('pixelBoard', (JSON.stringify(boardColors)));
   localStorage.setItem('boardSize', (JSON.stringify(boardSize)));
-}
-
-// Pinta o board com os dados salvos carregados
-const paintBoard = () => {
-  const pixels = document.getElementsByClassName('pixel');
-  for (let index = 0; index < pixels.length; index += 1) {
-    pixels[index].style.backgroundColor = boardColors[index];
-  }
-}
+};
 
 // Chama funções
 
