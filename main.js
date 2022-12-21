@@ -7,6 +7,7 @@ let paletteColors = {
 };
 let selectedColor = 'black';
 let boardColors = [];
+let boardSize = 5;
 
 // localStorage?
 if (localStorage.getItem('colorPalette')) {
@@ -21,6 +22,8 @@ const palette = document.getElementById('color-palette');
 const randomColorsBtn = document.getElementById('button-random-color');
 const board = document.getElementById('pixel-board');
 const clearBtn = document.getElementById('clear-board');
+const vqvBtn = document.getElementById('generate-board');
+const pixelBoard = document.getElementById('pixel-board');
 
 // Coloca as cores na paleta
 const fillPalette = () => {
@@ -40,9 +43,9 @@ const fillPalette = () => {
 const randomColors = () => {
     for (let index = 1; index <= 3; index += 1) {
         // from https://stackoverflow.com/questions/1152024/best-way-to-generate-a-random-color-in-javascript
-        const r = Math.floor(Math.random()*256);
-        const g = Math.floor(Math.random()*256);
-        const b = Math.floor(Math.random()*256);
+        const r = Math.floor(Math.random() * 256);
+        const g = Math.floor(Math.random() * 256);
+        const b = Math.floor(Math.random() * 256);
         const randomColor = "rgb(" + r + "," + g + "," + b + ")";
         // -------------------------------------
         const colors = document.getElementsByClassName('color');
@@ -54,13 +57,32 @@ const randomColors = () => {
 
 // Cria o board
 const createBoard = () => {
-    for (let index = 0; index < 25; index += 1) {
+    pixelBoard.style.width = `${42 * boardSize}px`;
+    for (let index = 0; index < (boardSize ** 2); index += 1) {
         const pixel = document.createElement('div');
         pixel.classList.add('pixel');
         boardColors.length > 0 ? pixel.style.backgroundColor = boardColors[index] : pixel.style.backgroundColor = 'white';
         board.appendChild(pixel);
         pixel.addEventListener('click', paint)
     }
+}
+
+// Modifica o tamanho do board
+const setBoardSize = (event) => {
+    // Valida o valor
+    if (document.getElementById('board-size').value == '') {
+        window.alert('Board inválido!');
+        return;
+    }
+    // Deleta o board antigo
+    for (let index = 0; index < (boardSize ** 2); index += 1) {
+        const pixel = document.getElementsByClassName('pixel');
+        pixel[0].remove(0);
+    }
+    localStorage.removeItem('pixelBoard');
+    // Cria o novo board
+    boardSize = parseInt(document.getElementById('board-size').value);
+    createBoard();
 }
 
 // Seleciona cor da paleta
@@ -91,7 +113,7 @@ const clearBoard = () => {
 // Salva o quadro
 const saveBoard = () => {
     const pixels = document.getElementsByClassName('pixel');
-    for (let index = 0; index < pixels.length; index += 1) { 
+    for (let index = 0; index < pixels.length; index += 1) {
         boardColors[index] = pixels[index].style.backgroundColor;
     }
     localStorage.setItem('pixelBoard', (JSON.stringify(boardColors)))
@@ -100,7 +122,7 @@ const saveBoard = () => {
 // Pinta o board com os dados salvos carregados
 const paintBoard = () => {
     const pixels = document.getElementsByClassName('pixel');
-    for (let index = 0; index < pixels.length; index += 1) { 
+    for (let index = 0; index < pixels.length; index += 1) {
         pixels[index].style.backgroundColor = boardColors[index];
     }
 }
@@ -114,3 +136,4 @@ createBoard();
 
 randomColorsBtn.addEventListener('click', randomColors);
 clearBtn.addEventListener('click', clearBoard);
+vqvBtn.addEventListener('click', setBoardSize);
