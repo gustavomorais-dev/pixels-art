@@ -36,7 +36,7 @@ const selectColor = (event) => {
   }
   event.target.classList.add('selected');
   selectedColor = event.target.style.backgroundColor;
-}
+};
 
 // Coloca as cores na paleta
 const fillPalette = () => {
@@ -49,36 +49,45 @@ const fillPalette = () => {
   }
   const colors = document.getElementsByClassName('color');
   colors[0].classList.add('selected');
-}
+};
 
 // Gera cores aleatórias para a paleta
 const randomColors = () => {
-    for (let index = 1; index <= 3; index += 1) {
-        // from https://stackoverflow.com/questions/1152024/best-way-to-generate-a-random-color-in-javascript
-        const r = Math.floor(Math.random() * 256);
-        const g = Math.floor(Math.random() * 256);
-        const b = Math.floor(Math.random() * 256);
-        const randomColor = "rgb(" + r + "," + g + "," + b + ")";
-        // -------------------------------------
-        const colors = document.getElementsByClassName('color');
-        paletteColors[`${index + 1}`] = randomColor;
-        colors[index].style.backgroundColor = randomColor;
-    }
-    localStorage.setItem('colorPalette', JSON.stringify(paletteColors));
+  for (let index = 1; index <= 3; index += 1) {
+    // from https://stackoverflow.com/questions/1152024/best-way-to-generate-a-random-color-in-javascript
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+    const randomb = `rgb(${r},${g},${b})`;
+    // -------------------------------------
+    const colors = document.getElementsByClassName('color');
+    paletteColors[`${index + 1}`] = randomColor;
+    colors[index].style.backgroundColor = randomColor;
+  }
+  localStorage.setItem('colorPalette', JSON.stringify(paletteColors));
+};
+
+// Colore um pixel
+const paint = (event) => {
+    event.target.style.backgroundColor = selectedColor;
+    saveBoard();
 }
 
 // Cria o board
 const createBoard = () => {
-    pixelBoard.style.width = `${42 * boardSize}px`;
-    for (let index = 0; index < (boardSize ** 2); index += 1) {
-        const pixel = document.createElement('div');
-        pixel.classList.add('pixel');
-        boardColors.length > 0 ? pixel.style.backgroundColor = boardColors[index] : pixel.style.backgroundColor = 'white';
-        board.appendChild(pixel);
-        pixel.addEventListener('click', paint)
+  pixelBoard.style.width = `${42 * boardSize}px`;
+  for (let index = 0; index < (boardSize ** 2); index += 1) {
+    const pixel = document.createElement('div');
+    pixel.classList.add('pixel');
+    if (boardColors.length > 0) { 
+      pixel.style.backgroundColor = boardColors[index];
+      pixel.style.backgroundColor = 'white';
     }
-    saveBoard();
-}
+    board.appendChild(pixel);
+    pixel.addEventListener('click', paint)
+  }
+  saveBoard();
+};
 
 // Modifica o tamanho do board
 const setBoardSize = (event) => {
@@ -103,12 +112,6 @@ const setBoardSize = (event) => {
     // Cria o novo board
     boardSize = parseInt(document.getElementById('board-size').value);
     createBoard();
-}
-
-// Colore um pixel
-const paint = (event) => {
-    event.target.style.backgroundColor = selectedColor;
-    saveBoard();
 }
 
 // Limpa o quadro
