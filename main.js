@@ -69,8 +69,8 @@ const randomColors = () => {
 
 // Colore um pixel
 const paint = (event) => {
-    event.target.style.backgroundColor = selectedColor;
-    saveBoard();
+  event.target.style.backgroundColor = selectedColor;
+  saveBoard();
 }
 
 // Cria o board
@@ -81,6 +81,7 @@ const createBoard = () => {
     pixel.classList.add('pixel');
     if (boardColors.length > 0) { 
       pixel.style.backgroundColor = boardColors[index];
+    } else {
       pixel.style.backgroundColor = 'white';
     }
     board.appendChild(pixel);
@@ -91,54 +92,54 @@ const createBoard = () => {
 
 // Modifica o tamanho do board
 const setBoardSize = (event) => {
-    // Valida o valor
-    if (document.getElementById('board-size').value == '') {
-        window.alert('Board inválido!');
-        return;
-    }
-    // Corrige o valor
-    if (document.getElementById('board-size').value < 5) {
-        document.getElementById('board-size').value = 5;
-    }
-    if (document.getElementById('board-size').value > 50) {
-        document.getElementById('board-size').value = 50;
-    }
-    // Deleta o board antigo
-    for (let index = 0; index < (boardSize ** 2); index += 1) {
-        const pixel = document.getElementsByClassName('pixel');
-        pixel[0].remove(0);
-    }
-    localStorage.removeItem('pixelBoard');
-    // Cria o novo board
-    boardSize = parseInt(document.getElementById('board-size').value);
-    createBoard();
+  // Valida o valor
+  if (document.getElementById('board-size').value == '') {
+    window.alert('Board inválido!');
+    return;
+  }
+  // Corrige o valor
+  if (document.getElementById('board-size').value < 5) {
+    document.getElementById('board-size').value = 5;
+  }
+  if (document.getElementById('board-size').value > 50) {
+    document.getElementById('board-size').value = 50;
+  }
+  // Deleta o board antigo
+  for (let index = 0; index < (boardSize ** 2); index += 1) {
+    const pixel = document.getElementsByClassName('pixel');
+    pixel[0].remove(0);
+  }
+  localStorage.removeItem('pixelBoard');
+  // Cria o novo board
+  boardSize = parseInt(document.getElementById('board-size').value);
+  createBoard();
 }
 
 // Limpa o quadro
 const clearBoard = () => {
-    const pixels = document.getElementsByClassName('pixel');
-    for (let index = 0; index < pixels.length; index += 1) {
-        pixels[index].style.backgroundColor = 'white';
-    }
-    saveBoard();
+  const pixels = document.getElementsByClassName('pixel');
+  for (let index = 0; index < pixels.length; index += 1) {
+    pixels[index].style.backgroundColor = 'white';
+  }
+  saveBoard();
 }
 
 // Salva o quadro
 const saveBoard = () => {
-    const pixels = document.getElementsByClassName('pixel');
-    for (let index = 0; index < pixels.length; index += 1) {
-        boardColors[index] = pixels[index].style.backgroundColor;
-    }
-    localStorage.setItem('pixelBoard', (JSON.stringify(boardColors)));
-    localStorage.setItem('boardSize', (JSON.stringify(boardSize)));
+  const pixels = document.getElementsByClassName('pixel');
+  for (let index = 0; index < pixels.length; index += 1) {
+    boardColors[index] = pixels[index].style.backgroundColor;
+  }
+  localStorage.setItem('pixelBoard', (JSON.stringify(boardColors)));
+  localStorage.setItem('boardSize', (JSON.stringify(boardSize)));
 }
 
 // Pinta o board com os dados salvos carregados
 const paintBoard = () => {
-    const pixels = document.getElementsByClassName('pixel');
-    for (let index = 0; index < pixels.length; index += 1) {
-        pixels[index].style.backgroundColor = boardColors[index];
-    }
+  const pixels = document.getElementsByClassName('pixel');
+  for (let index = 0; index < pixels.length; index += 1) {
+    pixels[index].style.backgroundColor = boardColors[index];
+  }
 }
 
 // Chama funções
