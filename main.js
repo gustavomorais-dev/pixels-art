@@ -74,6 +74,13 @@ const setBoardSize = (event) => {
         window.alert('Board inválido!');
         return;
     }
+    // Corrige o valor
+    if (document.getElementById('board-size').value < 5) {
+        document.getElementById('board-size').value = 5;
+    }
+    if (document.getElementById('board-size').value > 50) {
+        document.getElementById('board-size').value = 50;
+    }
     // Deleta o board antigo
     for (let index = 0; index < (boardSize ** 2); index += 1) {
         const pixel = document.getElementsByClassName('pixel');
