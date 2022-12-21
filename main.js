@@ -1,9 +1,9 @@
 // Custom
 let paletteColors = {
-    1: 'black',
-    2: '#4a362f',
-    3: '#978f84',
-    4: '#b7ae8f',
+  1: 'black',
+  2: '#4a362f',
+  3: '#978f84',
+  4: '#b7ae8f',
 };
 let selectedColor = 'black';
 let boardColors = [];
@@ -11,13 +11,13 @@ let boardSize = 5;
 
 // localStorage?
 if (localStorage.getItem('colorPalette')) {
-    paletteColors = JSON.parse(localStorage.getItem('colorPalette'));
+  paletteColors = JSON.parse(localStorage.getItem('colorPalette'));
 }
 if (localStorage.getItem('pixelBoard')) {
-    boardColors = JSON.parse(localStorage.getItem('pixelBoard'));
+  boardColors = JSON.parse(localStorage.getItem('pixelBoard'));
 }
 if (localStorage.getItem('boardSize')) {
-    boardSize = JSON.parse(localStorage.getItem('boardSize'));
+  boardSize = JSON.parse(localStorage.getItem('boardSize'));
 }
 
 // Captura elementos
@@ -28,18 +28,27 @@ const clearBtn = document.getElementById('clear-board');
 const vqvBtn = document.getElementById('generate-board');
 const pixelBoard = document.getElementById('pixel-board');
 
+// Seleciona cor da paleta
+const selectColor = (event) => {
+  const colors = document.getElementsByClassName('color');
+  for (let index = 0; index < colors.length; index += 1) {
+    colors[index].classList.remove('selected');
+  }
+  event.target.classList.add('selected');
+  selectedColor = event.target.style.backgroundColor;
+}
+
 // Coloca as cores na paleta
 const fillPalette = () => {
-    for (let index = 1; index <= 4; index += 1) {
-        const color = document.createElement('div');
-        color.style.backgroundColor = paletteColors[`${index}`];
-        color.classList.add('color');
-        palette.appendChild(color);
-        color.addEventListener('click', selectColor);
-
-    }
-    const colors = document.getElementsByClassName('color');
-    colors[0].classList.add('selected');
+  for (let index = 1; index <= 4; index += 1) {
+    const color = document.createElement('div');
+    color.style.backgroundColor = paletteColors[`${index}`];
+    color.classList.add('color');
+    palette.appendChild(color);
+    color.addEventListener('click', selectColor);
+  }
+  const colors = document.getElementsByClassName('color');
+  colors[0].classList.add('selected');
 }
 
 // Gera cores aleatórias para a paleta
@@ -94,16 +103,6 @@ const setBoardSize = (event) => {
     // Cria o novo board
     boardSize = parseInt(document.getElementById('board-size').value);
     createBoard();
-}
-
-// Seleciona cor da paleta
-const selectColor = (event) => {
-    const colors = document.getElementsByClassName('color');
-    for (let index = 0; index < colors.length; index += 1) {
-        colors[index].classList.remove('selected');
-    }
-    event.target.classList.add('selected');
-    selectedColor = event.target.style.backgroundColor;
 }
 
 // Colore um pixel
