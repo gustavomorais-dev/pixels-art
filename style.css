@@ -1,25 +1,25 @@
 body {
-    background-color: blueviolet;
+  background-color: blueviolet;
 }
 
 .color {
-    width: 50px;
-    height: 50px;
-    display: inline-block;
-    margin-right: 10px;
-    border: 1px solid black;
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  margin-right: 10px;
+  border: 1px solid black;
 }
 
 #pixel-board {
-    margin-top: 10px;
-    width: 210px;
-    line-height: 0px;
+  margin-top: 10px;
+  width: 210px;
+  line-height: 0px;
 }
 
 #pixel-board .pixel {
-    background-color: white;
-    width: 40px;
-    height: 40px;
-    border: 1px solid black;
-    display: inline-block;
+  background-color: white;
+  width: 40px;
+  height: 40px;
+  border: 1px solid black;
+  display: inline-block;
 }
