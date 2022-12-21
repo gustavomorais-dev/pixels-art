@@ -58,7 +58,7 @@ const randomColors = () => {
     const r = Math.floor(Math.random() * 256);
     const g = Math.floor(Math.random() * 256);
     const b = Math.floor(Math.random() * 256);
-    const randomb = `rgb(${r},${g},${b})`;
+    const randomColor = `rgb(${r},${g},${b})`;
     // -------------------------------------
     const colors = document.getElementsByClassName('color');
     paletteColors[`${index + 1}`] = randomColor;
