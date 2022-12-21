@@ -16,6 +16,9 @@ if (localStorage.getItem('colorPalette')) {
 if (localStorage.getItem('pixelBoard')) {
     boardColors = JSON.parse(localStorage.getItem('pixelBoard'));
 }
+if (localStorage.getItem('boardSize')) {
+    boardSize = JSON.parse(localStorage.getItem('boardSize'));
+}
 
 // Captura elementos
 const palette = document.getElementById('color-palette');
@@ -65,6 +68,7 @@ const createBoard = () => {
         board.appendChild(pixel);
         pixel.addEventListener('click', paint)
     }
+    saveBoard();
 }
 
 // Modifica o tamanho do board
@@ -123,7 +127,8 @@ const saveBoard = () => {
     for (let index = 0; index < pixels.length; index += 1) {
         boardColors[index] = pixels[index].style.backgroundColor;
     }
-    localStorage.setItem('pixelBoard', (JSON.stringify(boardColors)))
+    localStorage.setItem('pixelBoard', (JSON.stringify(boardColors)));
+    localStorage.setItem('boardSize', (JSON.stringify(boardSize)));
 }
 
 // Pinta o board com os dados salvos carregados
